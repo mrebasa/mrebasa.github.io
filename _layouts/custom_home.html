@@ -1,0 +1,27 @@
+---
+layout: archive
+---
+
+{{ content }}
+
+<h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h3>
+
+{% assign items_per_row = 3 %}
+{% assign row-offset = 0 %}
+{% assign num_rows = site.portfolio.size | divided_by: items_per_row %}
+{% assign remainder = site.portfolio.size | modulo: items_per_row %}
+{% unless remainder == 0 %}
+ {% assign num_rows = num_rows | plus:1 %}
+{% endunless %}
+
+<div class="entries__home__flex__all">
+{% for row in (1..num_rows) %}
+  <div class="entries__home__row__flex">
+    {% for post in site.portfolio limit:items_per_row offset:row-offset %}
+      {% include collection-item-preview.html type="grid" %}
+    {% endfor %}
+  </div>
+  {% assign row-offset = row | times:items_per_row %}
+{% endfor %}
+</div>
+{% include paginator.html %}

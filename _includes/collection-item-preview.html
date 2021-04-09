@@ -1,0 +1,37 @@
+{% if post.header.teaser %}
+  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
+{% else %}
+  {% assign teaser = site.teaser %}
+{% endif %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+<div class= "{{include.type | default: "list" }}__item__home"> <!--Grid item -->
+    {% if include.type == "grid" and teaser %}
+    <img class = "grid__item__image__home" src=
+        {% if teaser contains "://" %}
+          "{{ teaser }}"
+        {% else %}
+          "{{ teaser | relative_url }}"
+        {% endif %}
+    alt=""><!--item image -> teaser -->
+    {% endif %}
+    <div class="grid__item__home__overlay__container">
+      <h3 class="grid__item__home__title">{{ title }}</h3><!--item title -> title -->
+      {% if post.read_time %}
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
+      {% endif %}
+      {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
+        <div class="grid__item__home__overlay">   
+          {% if post.link %}
+            <button class="grid__item__home__button_ex" href="{{ post.link }}">{{ site.data.ui-text[site.locale].more_label | remove: ":" | default: "More" }}</button> <a href="{{ post.url | relative_url }}" rel="permalink"><i class="fas fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
+          {% else %}
+            <button class="grid__item__home__button" type ="button" onclick="location.href='{{ post.url | relative_url }}'" >{{ site.data.ui-text[site.locale].more_label | remove: ":" | default: "More" }}</button>
+          {% endif %}
+        </div>
+    </div>
+</div>

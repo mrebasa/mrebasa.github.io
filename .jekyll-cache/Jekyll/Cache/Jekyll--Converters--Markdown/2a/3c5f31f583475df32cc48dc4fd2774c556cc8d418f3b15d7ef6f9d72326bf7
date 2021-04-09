@@ -1,0 +1,124 @@
+I"¿$<p><br /></p>
+
+<h1 id="context">Context</h1>
+
+<p>First time in contact with a 3D Engine code. Pretty intensive work and a lot of code rewritten during the last year on ESAT. This engine has been the result of the work with <a href="https://thelitelboy.github.io/">Imanol Saenz Aguirre</a>.</p>
+
+<h2 id="demos">Demos</h2>
+
+<p>Xavier Rebasa Moll</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/utU28B_dAic?start=82" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<p>Imanol Saenz Aguirre</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GhtkPpIKSc0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<h2 id="apis-used">Apis Used</h2>
+<ul>
+  <li>OpenGL + GLFW</li>
+  <li>ImGui</li>
+  <li>Bullet</li>
+</ul>
+
+<h2 id="main-features">Main Features</h2>
+<ul>
+  <li>Structure
+    <ul>
+      <li><a href="#user-engine-comunication">User-Engine Comunication</a></li>
+      <li><a href="#instancing">Instancing</a></li>
+    </ul>
+  </li>
+  <li>Rendering
+    <ul>
+      <li><a href="#forward-rendering">Forward Rendering</a></li>
+      <li><a href="#oclussion-culling">Oclussion Culling</a></li>
+      <li><a href="#lightning">Lightning</a></li>
+      <li><a href="#physically-based-rendering-pbr">PBR</a></li>
+    </ul>
+  </li>
+  <li>Physics
+    <ul>
+      <li><a href="#bullet">Bullet</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="project">Project</h1>
+<h2 id="structure">Structure</h2>
+
+<h3 id="user-engine-comunication">User-Engine Comunication</h3>
+
+<p>The engine code has been implemented in a way that a user can manipulate the data without using any core class. The user changes are applied before rendering but not at the moment the user requested.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="c1">//User Code</span>
+
+<span class="n">Node</span> <span class="n">n</span><span class="p">;</span> <span class="c1">//Invalid identifier, any change won't be applied</span>
+<span class="n">n</span><span class="p">.</span><span class="n">Create</span><span class="p">();</span> <span class="c1">//Insertion to the engine node system, ID is now valid</span>
+
+<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">engine</span><span class="p">.</span><span class="n">IsClosed</span><span class="p">())</span> <span class="p">{</span>
+	<span class="c1">//Change node</span>
+	<span class="n">engine</span><span class="p">.</span><span class="n">EndFrame</span><span class="p">();</span><span class="c1">//Changes are applied</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="instancing">Instancing</h3>
+
+<p>Any node can be set as an instance node. When this happens that node will be added to an array of objects that share the same properties, based on material and geometry used.</p>
+
+<p>That structure uses a node as a shared parent for all the instances nodes of the list.
+That way, only one world matrix needs to be calculated and all the information sent to the GPU is relative to that parent.</p>
+
+<p><img src="/assets/PostsAssets/Engine3D/InstanceParent.png" alt="image-center" class="align-center" /></p>
+
+<h2 id="rendering">Rendering</h2>
+<h3 id="forward-rendering">Forward Rendering</h3>
+
+<p>Each object/structure to be rendered is added to a vector being processed at the engine thread when ready.</p>
+
+<h3 id="oclussion-culling">Oclussion Culling</h3>
+
+<p>Each object/structure handles an OpenGL query. That query is configured to return true if any pixel has been rendered for that object. In the case of an instanced, object it returns true if any of the nodes in the structure has been able to render any pixel.</p>
+
+<p><img src="/assets/PostsAssets/Engine3D/Culling1.png" alt="image-center" class="align-center" />
+<img src="/assets/PostsAssets/Engine3D/Culling2.png" alt="image-center" class="align-center" /></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="c1">//After a simple render (just bounding boxes with no texture)</span>
+<span class="n">DisplayList</span> <span class="n">dList</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="n">NodeCore</span><span class="o">&amp;</span> <span class="n">node</span> <span class="o">:</span> <span class="n">engine</span><span class="p">.</span><span class="n">nodeSystem_</span><span class="p">.</span><span class="n">activeNodes_</span><span class="p">){</span>
+	<span class="n">node</span><span class="p">.</span><span class="n">query_</span><span class="p">.</span><span class="n">GetResult</span><span class="p">()</span> <span class="o">?</span> <span class="n">dList</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">for</span><span class="p">(</span><span class="n">NodeCore</span><span class="o">&amp;</span> <span class="n">node</span> <span class="o">:</span> <span class="n">dList</span><span class="p">.</span><span class="n">list</span><span class="p">){</span>
+	<span class="n">node</span><span class="p">.</span><span class="n">Draw</span><span class="p">();</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="lightning">Lightning</h3>
+
+<p>This engine is able to handle 64 point lights, 32 spotlights and 8 directional lights although only directional lights cast shadows.
+Each directional light saves a depth 2DTexture which is sent to the render shader to render the shadows.</p>
+
+<p><img src="/assets/PostsAssets/Engine3D/3DEngine-Shadows.png" alt="image-center" class="align-center" /></p>
+
+<h3 id="physically-based-rendering-pbr">Physically Based Rendering (PBR)</h3>
+
+<p>Each node has a list of available materials to be applied. That material will handle all the textures needed for PBR to work. [Albedo, NormalMap, Metallic, Roughness, AmbientOclussion].
+That allows rendering an object more realistically as its physical properties are taken into account when rendered.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++">  <span class="k">const</span> <span class="n">char8</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span>  <span class="s">"../data/textures/rustediron_albedo.png"</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">char8</span><span class="o">*</span> <span class="n">n</span> <span class="o">=</span>  <span class="s">"../data/textures/rustediron_normal.png"</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">char8</span><span class="o">*</span> <span class="n">m</span> <span class="o">=</span>  <span class="s">"../data/textures/rustediron_metallic.png"</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">char8</span><span class="o">*</span> <span class="n">ro</span> <span class="o">=</span> <span class="s">"../data/textures/rustediron_roughness.png"</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">char8</span><span class="o">*</span> <span class="n">ao</span> <span class="o">=</span> <span class="s">"../data/textures/rustediron_ao.png"</span><span class="p">;</span>
+
+<span class="n">Material</span> <span class="n">mat</span><span class="p">;</span>
+  <span class="n">mat</span><span class="p">.</span><span class="n">SetDisplayName</span><span class="p">(</span><span class="s">"Material 1"</span><span class="p">);</span>
+  <span class="n">mat</span><span class="p">.</span><span class="n">SetTexture</span><span class="p">(</span><span class="n">TextureType</span><span class="o">::</span><span class="n">kTT_Albedo</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+  <span class="n">mat</span><span class="p">.</span><span class="n">SetTexture</span><span class="p">(</span><span class="n">TextureType</span><span class="o">::</span><span class="n">kTT_Normal</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+  <span class="n">mat</span><span class="p">.</span><span class="n">SetTexture</span><span class="p">(</span><span class="n">TextureType</span><span class="o">::</span><span class="n">kTT_Metallic</span><span class="p">,</span> <span class="n">m</span><span class="p">);</span>
+  <span class="n">mat</span><span class="p">.</span><span class="n">SetTexture</span><span class="p">(</span><span class="n">TextureType</span><span class="o">::</span><span class="n">kTT_Roughness</span><span class="p">,</span> <span class="n">ro</span><span class="p">);</span>
+  <span class="n">mat</span><span class="p">.</span><span class="n">SetTexture</span><span class="p">(</span><span class="n">TextureType</span><span class="o">::</span><span class="n">kTT_AmbientOclusion</span><span class="p">,</span> <span class="n">ao</span><span class="p">);</span></code></pre></figure>
+
+<h2 id="physics">Physics</h2>
+
+<h3 id="bullet">Bullet</h3>
+
+<p>Bullet physics library has been implemented and used to handle nodes with gravity and collisions enabled.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GhtkPpIKSc0?start=83" frameborder="0" allow="encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+:ET

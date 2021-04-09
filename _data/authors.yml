@@ -1,0 +1,19 @@
+
+
+Xavier Rebasa Moll:
+  name: "Xavier Rebasa Moll"
+  bio: ""
+  avatar: "/assets/images/profile.jpg"
+  facebook: xavier.rebasamoll
+  linkedin: xavier-rebasa-moll-b5723715b 
+  email: rebasamo@esat-alumni.com
+  links:
+    - label: "+34 661799899"
+      icon: "fas fa-fw fa-phone-square"
+      url: "tel:+34 661799899"
+
+  custom:
+    - label: "CV"
+      url: "/assets/Docs/CV2.pdf"
+    - label: "Covering Letter"
+      url: "/assets/Docs/CoveringLetter.pdf"

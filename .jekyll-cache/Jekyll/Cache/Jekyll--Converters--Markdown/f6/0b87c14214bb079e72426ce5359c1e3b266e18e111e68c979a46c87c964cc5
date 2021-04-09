@@ -1,0 +1,164 @@
+I"�<h1 id="about-me">About Me</h1>
+<font style="opacity: 0.7" size="3">
+I am a young programmer on the way of refining my programming abilities as well as forging new ones on the way. Very interested in the procedural code as well as instancing. Something between Minecraft and Cube World would be the environment I would like to reproduce in a handmade engine as I am learning. Generate a procedural terrain, handle the information of the world, discard the unnecessary information and render all with the best performance possible are some of the main features I want to learn.
+
+<br />
+Another topic I love is Space. Since very young I got absorbed with the documentaries about all the crazy stuff that is happening in the space. Games like Elite Dangerous or Star Citizen were some of my first ideal games to program myself I thought of when I started studying programming. Clearly not yet knowing all the work that entails.
+
+<br />
+Currently looking for a job, if possible, in a company with games with those characteristics where to learn in depth every nook of the algorithms.
+
+<br />
+<br />
+
+I easily immerse myself in a piece of code until it results in what I'm looking for, which is one of my strengths.
+</font>
+<p><br /></p>
+
+<h1 id="education">Education</h1>
+
+<h2 id="esat-escuela-superior-de-arte-y-tecnología"><a href="https://www.esat.es/">ESAT</a> (Escuela Superior de Arte y Tecnología)</h2>
+<p><a href="https://www.google.com/maps/place/ESAT+-+Escuela+Superior+de+Arte+y+Tecnolog%C3%ADa/@39.4778271,-0.3754507,17z/data=!3m1!4b1!4m5!3m4!1s0xd6048ad1c6e6aef:0x3f3bd8ce9722b1f3!8m2!3d39.477823!4d-0.373262"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> Valencia, Spain</a></p>
+<ul>
+  <li><a href="https://www.esat.es/estudios/carreras/carrera-programacion-videojuegos/">BTEc Level 5 HND in Computing And Systems Develpment</a></li>
+  <li>Graduated with <strong>Merit</strong></li>
+  <li>2016-2018</li>
+</ul>
+
+<h2 id="shu-sheffiel-hallam-university"><a href="https://www.shu.ac.uk/">SHU</a> (Sheffiel Hallam University)</h2>
+<p><a href="https://www.google.com/maps/place/Sheffield+Hallam+University/@53.3782423,-1.4680749,17z/data=!3m1!4b1!4m5!3m4!1s0x487982831b2243e9:0x37add1086f57be4f!8m2!3d53.3782391!4d-1.4658862"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> Sheffield, UK</a></p>
+<ul>
+  <li><a href="https://www.shu.ac.uk/courses/computing/bsc-honours-computer-science-for-games/full-time/2019">BSc(honours) Computer Science for Games</a></li>
+  <li>Studying (2018-2019)</li>
+</ul>
+
+<h1 id="experience">Experience</h1>
+<h2 id="programming">Programming</h2>
+
+<h3 id="projects">Projects</h3>
+
+<ul>
+  <li>
+    <p><a href="/portfolio/ExamplePage%20copy%202/">3D Engine</a></p>
+  </li>
+  <li>
+    <p><a href="/portfolio/ExamplePage%20copy%203/">3D Engine</a></p>
+  </li>
+  <li>
+    <p><a href="/portfolio/ExamplePage%20copy/">3D Engine</a></p>
+  </li>
+  <li>
+    <p><a href="/portfolio/ExamplePage/">3D Engine</a></p>
+  </li>
+</ul>
+
+<h3 id="currently-working">Currently Working</h3>
+
+<ul>
+  <li>UE4-PS4 game</li>
+</ul>
+
+<p>Currently working in a team of 5 programmers and 3 artists aiming for a game to work in a PS4. That project is made for the subject of 3D Games Prototyping in <a href="https://www.shu.ac.uk/">SHU</a>. The game will be finished around the beginning of May.</p>
+
+<ul>
+  <li>Asset Management External Tool</li>
+</ul>
+
+<p>That tool aim is to provide a way to work simultaneously in your assets while they are being compiled and prepared for different platforms or environments. The tool will work in second plane watching over a folder looking for updates. The file changed will be recompiled and sent to the different folders for the different profiles configured.</p>
+
+<p>The tool is being programmed in a way that any command related function can be called for a specific file. An external command-line tool or a Python script, both are viable to work with this tool.</p>
+
+<ul>
+  <li>Self made Instancing based Engine</li>
+</ul>
+
+<p>That is one of the projects I am more excited about, but, at the same time is the one I have less time to work with.</p>
+
+<p>The aim is to have a good customizable engine capable of handle the more objects the better. I want to learn how to send most of the information at the same shader (OpenGL for now) and how to handle it. Most of that has been done in one of my previous projects <a href="/portfolio/2019-02-08-3DEngine/">3D Engine</a> but it was implemented in the mid-end development, so it wasn’t working at his maximum capacity as it had been adapted to the code at that time.</p>
+
+<h2 id="others">Others</h2>
+
+<h3 id="previous-works">Previous Works</h3>
+
+<ul>
+  <li>
+    <p><a href="/AlcanadaGolf/">Alcanada Golf</a></p>
+  </li>
+  <li>
+    <p><a href="/works/President%20Hotel/">HSM President Hotel</a></p>
+  </li>
+  <li>
+    <p><a href="/works/Treglos%20Hotel/">Treglos Hotel</a></p>
+  </li>
+</ul>
+
+<h1 id="interests">Interests</h1>
+
+<h2 id="sports">Sports</h2>
+
+<ul>
+  <li>Judo
+    <ul>
+      <li>Main sport</li>
+      <li>15 years of experience</li>
+      <li>Brown belt</li>
+    </ul>
+  </li>
+  <li>Tennis
+    <ul>
+      <li>3 years of experience</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="gaming">Gaming</h2>
+
+<h3 id="favourite-games">Favourite Games</h3>
+
+<ul>
+  <li>Exploration/Sandbox
+    <ul>
+      <li>Elite Dangerous</li>
+      <li>Terraria</li>
+      <li>Starbound</li>
+      <li>Minecraft</li>
+      <li>Monster Hunter</li>
+    </ul>
+  </li>
+  <li>Roguelite
+    <ul>
+      <li>Dead Cells</li>
+      <li>Enter the Gungeon</li>
+      <li>The Binding of Isaac</li>
+    </ul>
+  </li>
+  <li>Funny Experience
+    <ul>
+      <li>Borderlands (Saga)</li>
+      <li>Magicka (Saga)</li>
+    </ul>
+  </li>
+  <li>Beats
+    <ul>
+      <li>Crypt of the NecroDancer</li>
+      <li>Beat Saber</li>
+    </ul>
+  </li>
+  <li>Narrative
+    <ul>
+      <li>To The Moon / Finding Paradise</li>
+    </ul>
+  </li>
+  <li>Metroidvania
+    <ul>
+      <li>Hollow Knight</li>
+      <li>Ori and the Blind Forest</li>
+    </ul>
+  </li>
+  <li>MOBA
+    <ul>
+      <li>League of Legends</li>
+    </ul>
+  </li>
+</ul>
+:ET

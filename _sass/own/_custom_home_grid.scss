@@ -1,0 +1,127 @@
+
+
+$white: #ffffff;
+$primary: #F2DAD7;
+$secondary: #D1A39E;
+$light: #CECDCA;
+$dark: #474545;
+
+$ease: all 0.3s ease-in-out;
+
+.entries__home__flex__all{
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+ flex-grow: 1;
+ flex-shrink: 1;
+ flex-basis: auto;
+ //max-height: max-content;
+ //max-width: unset;
+  height: auto;
+}
+
+.entries__home__row__flex{
+  display:flex;
+  position: relative;
+  flex-flow: row wrap;
+  height: auto;
+  //align-content: space-between;
+  flex: 1;
+  max-height: max-content;
+  //  //max-width: unset;
+  //  //max-height: unset;
+  //  flex-grow: 1;
+  //  flex-shrink: 1;
+  //  flex-basis: auto;
+  //&:hover{
+  //  flex: 100%;
+  //}
+}
+
+.grid__item__home {
+  transition: $ease;
+  flex:1;
+  position: relative;
+  background: rgba(255, 255, 255, 0);
+  overflow: hidden;
+  //display: inline-block;
+  margin: 3px;
+  max-width: unset;
+  max-height: unset;
+  height: auto;
+  &:hover{
+    transition: $ease;
+    flex:90%;
+    height: auto;
+    width:  max-content;
+  }
+  &:hover > .grid__item__image__home{
+    transition: $ease;
+    width:  max-content;
+    height: max-content;
+  }
+    .grid__item__home__title {
+      transition: $ease;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      padding: 1em 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      z-index: 3;
+    }
+    
+  .grid__item__image__home {
+    position: absolute;
+    object-fit: cover;
+    opacity: 0.9;
+    max-width: unset;
+    max-height: unset;
+    //width: max-content;
+  }
+}
+
+
+// project hover overlay
+.grid__item__home:hover .grid__item__home__overlay__container {
+  transition: $ease;
+    //transform: translateY(-5%);
+    backdrop-filter: blur(7px);
+}
+
+.grid__item__home:hover .grid__item__button__container {
+  transition: $ease;
+}
+.grid__item__home:hover .grid__item__home__title {
+    transition: $ease;
+    transform: scale(1.5);
+}
+
+  .grid__item__home__overlay__container {
+    transition: $ease;
+    height: 100%;
+    position: relative;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    //transform: translateY(101%);
+  }
+
+  .grid__item__home__button {
+    transition: $ease;
+    background: rgba(0, 0, 0, 0.2);
+    outline: none;
+    font-weight: 100;
+    letter-spacing: 2px;
+    border: 1px solid $dark;
+    color: $white;
+    text-transform: uppercase;
+    padding: 10px;
+  }
+  .grid__item__home__button:hover {
+    transition: $ease;
+    background: $dark;
+    color: $secondary;
+    transform: scale(1.05);
+  }
+

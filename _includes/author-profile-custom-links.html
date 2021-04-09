@@ -1,0 +1,42 @@
+<!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+<!--
+{% if author.custom %}
+        {% for custom in author.custom %}
+          {% if custom.title %}
+          	<h3>{{custom.title }}</h3>
+          {% endif %}
+
+          {% if custom.language %}
+          	<i class="far fa-flag" rel="nofollow noopener noreferrer" style="opacity: 0.5;" ></i>&nbsp&nbsp<font rel="nofollow noopener noreferrer" style="opacity: 1 " size= "4">{{ custom.language }}:</font><br>
+          	
+          {% endif %}
+          {% if custom.level %}
+          &nbsp&nbsp&nbsp&nbsp&nbsp<font style="opacity: 0.5 " rel="nofollow noopener noreferrer" size= "3">{{custom.level}}</font><br>
+          {% endif %}
+
+        {% endfor %}
+{% endif %}
+-->
+<hr>
+{% if author.custom %}
+{% for custom in author.custom %}
+
+{% if custom.url %}
+<font style="opacity: 1" size= "3">
+<a href={{custom.url}} rel="nofollow noopener noreferrer" target="_blank">
+  <i class="{{ custom.icon | default: 'fas fa-link' }}"></i>
+{% if custom.label %}
+{{custom.label}}
+{% endif %}
+</a>
+</font>
+{% endif %}
+
+{% endfor %}
+{% endif %}
